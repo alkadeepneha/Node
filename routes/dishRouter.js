@@ -215,7 +215,7 @@ dishRouter
         res.statusCode = 403;
         res.end("POST operation not supported on /dishes/" + req.params.dishId + "/comments/" + req.params.commentId);
     })
-    .put(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+    .put(authenticate.verifyUser, (req, res, next) => {
         Dishes.findById(req.params.dishId)
             .then(
                 (dish) => {
@@ -252,7 +252,7 @@ dishRouter
             )
             .catch((err) => next(err));
     })
-    .delete(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+    .delete(authenticate.verifyUser, (req, res, next) => {
         Dishes.findById(req.params.dishId)
             .then(
                 (dish) => {
